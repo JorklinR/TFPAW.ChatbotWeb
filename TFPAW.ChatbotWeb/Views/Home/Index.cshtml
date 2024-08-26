@@ -1,0 +1,93 @@
+﻿@{
+    ViewData["Title"] = "Chat";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .chat-box {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+        .chat-message {
+            margin-bottom: 10px;
+        }
+        .chat-message.user {
+            text-align: right;
+        }
+        .chat-message.assistant {
+            text-align: left;
+        }
+        .chat-input {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: white;
+            border-top: 1px solid #ddd;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>@ViewData["Title"]</h2>
+        <div class="chat-box" id="chatBox">
+            <!-- Mensajes del chat se agregarán aquí dinámicamente -->
+        </div>
+        <div class="chat-input">
+            <form id="chatForm">
+                <div class="form-group">
+                    <input type="text" id="messageInput" class="form-control" placeholder="Escribe tu mensaje..." required>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#chatForm').on('submit', function(event) {
+                event.preventDefault();
+
+                var message = $('#messageInput').val();
+                if (message.trim() === '') {
+                    return;
+                }
+
+                // Agregar el mensaje del usuario a la vista
+                $('#chatBox').append('<div class="chat-message user">' + message + '</div>');
+
+                // Limpiar el campo de entrada
+                $('#messageInput').val('');
+
+                // Enviar el mensaje al servidor
+                $.ajax({
+                    url: '/api/chatbot',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ message: message }),
+                    success: function(response) {
+                        // Agregar la respuesta del asistente a la vista
+                        $('#chatBox').append('<div class="chat-message assistant">' + response + '</div>');
+                        // Desplazar el chat hacia abajo
+                        $('#chatBox').scrollTop($('#chatBox')[0].scrollHeight);
+                    },
+                    error: function() {
+                        $('#chatBox').append('<div class="chat-message assistant">Error al enviar el mensaje.</div>');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

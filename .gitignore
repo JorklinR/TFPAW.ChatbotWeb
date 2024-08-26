@@ -1,0 +1,36 @@
+# Ignore the build output directories
+bin/
+obj/
+
+# Ignore the Visual Studio user-specific files
+*.user
+*.suo
+
+# Ignore the packages directory
+packages/
+
+# Ignore all files that might appear in the root folder, except the project file, NuGet config, and markdown files
+*.swp
+*.*~
+project.lock.json
+.DS_Store
+Thumbs.db
+
+# Ignore ASP.NET temporary files and build results
+*.csproj.user
+*.pubxml
+*.PublishSettings
+*.vs/
+
+# Exclude Nupkg and the VS Code settings
+*.nupkg
+.vscode/
+
+# Exclude log files and SQL database files
+*.ldf
+*.mdf
+*.log
+
+# Exclude ReSharper and Rider directory
+_ReSharper*/
+.idea/
