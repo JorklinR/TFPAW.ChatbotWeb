@@ -1,62 +1,37 @@
-﻿@{
-    ViewData["Title"] = "Chat";
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <style>
-        .chat-box {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 15px;
-            max-height: 400px;
-            overflow-y: auto;
-            background-color: #f9f9f9;
-        }
-        .chat-message {
-            margin-bottom: 10px;
-        }
-        .chat-message.user {
-            text-align: right;
-        }
-        .chat-message.assistant {
-            text-align: left;
-        }
-        .chat-input {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: white;
-            border-top: 1px solid #ddd;
-            padding: 10px;
-        }
+       
     </style>
 </head>
 <body>
-    <div class="container mt-4">
-        <h2>@ViewData["Title"]</h2>
-        <div class="chat-box" id="chatBox">
-            <!-- Mensajes del chat se agregarán aquí dinámicamente -->
-        </div>
-        <div class="chat-input">
-            <form id="chatForm">
-                <div class="form-group">
+    </BR>   </BR>  </BR>
+    <h1>Habla con la Inteligencia Artificial Sobre Tus Gastos</h1>
+    <div class="container">
+        <div class="card">
+            <h2>@ViewData["Title"]</h2>
+            <div class="chat-box" id="chatBox">
+                <!-- Mensajes del chat se agregarán aquí dinámicamente -->
+            </div>
+            <div class="chat-input">
+                <form id="chatForm">
                     <input type="text" id="messageInput" class="form-control" placeholder="Escribe tu mensaje..." required>
-                </div>
-                <button type="submit" class="btn btn-primary">Enviar</button>
-            </form>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+            </div>
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#chatForm').on('submit', function(event) {
+        $(document).ready(function () {
+            $('#chatForm').on('submit', function (event) {
                 event.preventDefault();
 
                 var message = $('#messageInput').val();
@@ -64,8 +39,13 @@
                     return;
                 }
 
-                // Agregar el mensaje del usuario a la vista
-                $('#chatBox').append('<div class="chat-message user">' + message + '</div>');
+                // Agregar el mensaje del usuario a la vista con la imagen
+                $('#chatBox').append(
+                    '<div class="chat-message user">' +
+                    '<img src="/css/mensaje.png" alt="User Image">' + // Reemplaza con tu ruta de imagen
+                    '<div>' + message + '</div>' +
+                    '</div>'
+                );
 
                 // Limpiar el campo de entrada
                 $('#messageInput').val('');
@@ -76,13 +56,18 @@
                     type: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify({ message: message }),
-                    success: function(response) {
-                        // Agregar la respuesta del asistente a la vista
-                        $('#chatBox').append('<div class="chat-message assistant">' + response + '</div>');
+                    success: function (response) {
+                        // Agregar la respuesta del asistente a la vista con la imagen
+                        $('#chatBox').append(
+                            '<div class="chat-message assistant">' +
+                            '<img src="/css/chatbot.png" alt="Assistant Image">' + // Reemplaza con tu ruta de imagen
+                            '<div>' + response + '</div>' +
+                            '</div>'
+                        );
                         // Desplazar el chat hacia abajo
                         $('#chatBox').scrollTop($('#chatBox')[0].scrollHeight);
                     },
-                    error: function() {
+                    error: function () {
                         $('#chatBox').append('<div class="chat-message assistant">Error al enviar el mensaje.</div>');
                     }
                 });

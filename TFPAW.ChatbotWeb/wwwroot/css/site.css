@@ -1,22 +1,186 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@900&display=swap');
 body {
-  margin-bottom: 60px;
+    background-color: #021024;
+    font-family: 'Roboto', Arial, sans-serif;
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+h1 {
+    font-family: 'Roboto Mono', monospace; /* Typewriter style font */
+    font-weight: 900; /* Makes the font thicker */
+    color: #00ff00; /* Gradient color effect */
+    background: linear-gradient(to right, #00ff00, #0000ff, #800080, #ff00ff, #ff1493);
+    /* Colors: Green, Blue, Purple, Pink, Deep Pink */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    text-align: center;
+    padding: 20px 0; /* Add padding for spacing */
+    margin: 0;
+}
+
+
+
+
+/* Header Styling */
+header {
+    font-size: 24px;
+    background-color: #021024;
+    color: white;
+    padding: 20px 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+
+    background-color: #172a47; /* Dark background */
+}
+
+.navbar-brand {
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.navbar-nav {
+    display: flex;
+}
+
+.nav-item {
+    margin: 0 10px;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+}
+
+    .nav-link:hover {
+        color: #ff9900; /* Highlight color on hover */
+    }
+
+
+
+/* Footer Styling */
+footer {
+    background-color: #021024; /* Dark background */
+    color: white;
+    text-align: center;
+    padding: 5vh;
+}
+
+    footer a {
+        color: white;
+        text-decoration: none;
+    }
+
+        footer a:hover {
+            color: darkgray;
+        }
+/*
+CHAT BOT*/
+.container {
+    background-color: transparent;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+}
+
+.card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.chat-box {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+.chat-message {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+    .chat-message.assistant {
+        text-align: left;
+    }
+    .chat-message img {
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+    }
+
+    .chat-message.user {
+        text-align: right;
+        flex-direction: row-reverse;
+    }
+
+    .chat-message.assistant {
+        text-align: left;
+        flex-direction: row;
+    }
+
+.chat-input {
+    border-top: 1px solid #ddd;
+    padding: 10px;
+    background-color: #fff; /* White background for the input area */
+    display: flex;
+    align-items: center;
+}
+    .chat-input input[type="text"] {
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        padding: 10px;
+        font-size: 16px;
+        flex: 1; /* Allows input to grow and fill available space */
+        margin-right: 10px; /* Spacing between input and button */
+    }
+    .chat-input button {
+        background-color: #007bff;
+        border: none;
+        border-radius: 20px;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .chat-input button:hover {
+            background-color: #0056b3;
+        }
+
+#chatForm {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+#messageInput {
+    flex: 1;
+    margin-right: 10px; /* Space between input and button */
 }
