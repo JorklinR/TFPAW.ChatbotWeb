@@ -14,10 +14,12 @@ public class ChatService : IChatService
     public ChatService(IConfiguration configuration)
     {
         _httpClient = new HttpClient();
-        _apiKey = "sk-YVzge0occrSwKstSqVaa8KjCwveOWoRoIQqHZrK9INT3BlbkFJ2uRyfuW-2FSwF2VVwKKahiZWwNuHYFcxv31DUrC7IA";
+        _apiKey = "";
+        /*Antigua API KEY sk-YVzge0occrSwKstSqVaa8KjCwveOWoRoIQqHZrK9INT3BlbkFJ2uRyfuW-2FSwF2VVwKKahiZWwNuHYFcxv31DUrC7IA*/
+
     }
 
-  public async Task<string> SendMessageAsync(string message)
+    public async Task<string> SendMessageAsync(string message)
 {
     var requestBody = new
     {

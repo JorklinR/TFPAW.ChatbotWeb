@@ -7,21 +7,84 @@ body {
     margin: 0;
     box-shadow: none;
 }
+
+.banner {
+    position: fixed;
+    top: -100px; /* Oculta el banner inicialmente */
+    left: 0;
+    right: 0;
+    background-color: #007bff; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 15px;
+    text-align: center;
+    transition: top 0.5s; /* Animación suave */
+    z-index: 1000; /* Asegura que el banner esté por encima del contenido */
+}
+
+    .banner.show {
+        top: 0; /* Muestra el banner al cambiar esta propiedad */
+    }
+
+    .banner button {
+        margin-left: 15px;
+        color: white;
+    }
+
+
+#closeBanner {
+    background-color: #dc3545; /* Color de fondo rojo */
+    border: none; /* Sin borde */
+    border-radius: 20px; /* Bordes redondeados */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    cursor: pointer; /* Cursor de puntero */
+    transition: background-color 0.3s; /* Transición suave para el hover */
+}
+
+    #closeBanner:hover {
+        background-color: #c82333; /* Color al pasar el mouse */
+    }
+
+
+/* Animación de Brinco */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-30px);
+    }
+
+    60% {
+        transform: translateY(-15px);
+    }
+}
+
+#clearChat {
+    margin-left: 10px; 
+}
+
+
 h1 {
-    font-family: 'Roboto Mono', monospace; /* Typewriter style font */
-    font-weight: 900; /* Makes the font thicker */
-    color: #00ff00; /* Gradient color effect */
+    /* Mantén el estilo original */
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 900;
+    color: #00ff00;
     background: linear-gradient(to right, #00ff00, #0000ff, #800080, #ff00ff, #ff1493);
-    /* Colors: Green, Blue, Purple, Pink, Deep Pink */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-fill-color: transparent;
+    /* Ajuste para centrado */
     text-align: center;
-    padding: 20px 0; /* Add padding for spacing */
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    padding: 20px 0;
     margin: 0;
+    /* Mantener la animación de brinco */
+    display: block; /* Esto asegura que el h1 se comporte como un bloque completo */
+    animation: bounce 2s infinite;
 }
-
 
 
 
@@ -70,6 +133,7 @@ header {
 
 
 
+
 /* Footer Styling */
 footer {
     background-color: #021024; /* Dark background */
@@ -103,7 +167,11 @@ CHAT BOT*/
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    width: 600px; 
+    max-width: 1500px; 
+    height: 800px; 
     display: flex;
+    align-self:center;
     flex-direction: column;
     flex: 1;
 }
@@ -112,10 +180,9 @@ CHAT BOT*/
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 20px;
-    max-height: 400px;
+    max-height: 300px;
     overflow-y: auto;
     background-color: #f9f9f9;
-    margin-bottom: 20px;
     flex: 1;
 }
 
@@ -184,3 +251,157 @@ CHAT BOT*/
     flex: 1;
     margin-right: 10px; /* Space between input and button */
 }
+
+/* Efecto de Pulso */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Efecto de Rotación */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Cambio de Color */
+@keyframes colorChange {
+    0% {
+        background-color: #007bff;
+    }
+
+    50% {
+        background-color: #ff9900;
+    }
+
+    100% {
+        background-color: #007bff;
+    }
+}
+
+/* Desvanecimiento */
+@keyframes fadeOutIn {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Efecto de Zoom */
+@keyframes zoom {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+#chatForm button.bounce {
+    animation: bounce 0.3s ease;
+}
+
+/* Animación de Desplazamiento Lateral */
+@keyframes slide {
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+}
+
+.chat-box {
+    animation: slide 3s infinite ease-in-out;
+}
+
+/* Animación de Latido */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.01);
+    }
+}
+
+.chat-box {
+    animation: pulse 2s infinite;
+}
+
+/* Animación de la Rueda de Carga */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1); 
+    border-left-color: #007bff; 
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite; 
+}
+.interactive-cat {
+    margin: 20px auto; /* Centra el gato y agrega espacio */
+    width: 200px; /* Ancho del contenedor */
+    height: 200px; /* Alto del contenedor */
+    border-radius: 50%; /* Bordes redondeados */
+    overflow: hidden; /* Esconde cualquier contenido que sobresalga */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidad */
+    transition: transform 0.3s; /* Transición suave para la animación */
+}
+
+    .interactive-cat img {
+        width: 100%; /* Asegura que la imagen ocupe todo el contenedor */
+        height: 100%; /* Asegura que la imagen ocupe todo el contenedor */
+        object-fit: cover; /* Mantiene la proporción de la imagen */
+    }
+
+    .interactive-cat:hover {
+        transform: scale(1.1); /* Efecto de aumento al pasar el mouse */
+    }

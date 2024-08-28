@@ -6,13 +6,22 @@
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    
     <style>
-       
+
     </style>
 </head>
 <body>
+    <div id="banner" class="banner">
+        <span id="bannerText">¡Bienvenido a la aplicación de Chat!</span>
+        <button id="closeBanner" class="btn btn-danger">Cerrar</button>
+    </div>
+
     </BR>   </BR>  </BR>
-    <h1>Habla con la Inteligencia Artificial Sobre Tus Gastos</h1>
+    <h1>Habla con la Inteligencia Artificial Sobre Tus Gatos</h1>
+    <div class="interactive-cat" id="interactiveCat">
+        <img src="https://media.giphy.com/media/o0vwzuFwCGAFO/giphy.gif" alt="Gato Animado">
+    </div>
     <div class="container">
         <div class="card">
             <h2>@ViewData["Title"]</h2>
@@ -23,11 +32,45 @@
                 <form id="chatForm">
                     <input type="text" id="messageInput" class="form-control" placeholder="Escribe tu mensaje..." required>
                     <button type="submit" class="btn btn-primary">Enviar</button>
+                    <button type="button" id="clearChat" class="btn btn-warning">Borrar Chat</button>
                 </form>
             </div>
         </div>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const banner = document.getElementById('banner');
+            const closeButton = document.getElementById('closeBanner');
+            const bannerText = document.getElementById('bannerText');
+
+            // Array de mensajes dinámicos
+            const messages = [
+                "¡Bienvenido a la aplicación de ChatBot del Grupo #3!",
+                "¡Empieza a chatear con tu asistente y vive la experiencia del AWP!",
+                "¡Explora todas las funcionalidades!",
+                "¡Gracias por usar nuestro servicio!"
+            ];
+
+            // Cambiar el mensaje cada 3 segundos
+            let messageIndex = 0;
+            setInterval(() => {
+                messageIndex = (messageIndex + 1) % messages.length; // Cicla a través de los mensajes
+                bannerText.textContent = messages[messageIndex];
+            }, 3000);
+
+            // Mostrar el banner con animación
+            setTimeout(() => {
+                banner.classList.add('show');
+            }, 500); // Esperar medio segundo antes de mostrar
+
+            // Cerrar el banner
+            closeButton.addEventListener('click', () => {
+                banner.classList.remove('show');
+            });
+        });
+    </script>
+   
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -50,6 +93,11 @@
                 // Limpiar el campo de entrada
                 $('#messageInput').val('');
 
+                // Mostrar el spinner de carga
+                var spinner = '<div id="loading-spinner" class="chat-message assistant"><div class="spinner"></div></div>';
+                $('#chatBox').append(spinner);
+                $('#chatBox').scrollTop($('#chatBox')[0].scrollHeight);
+
                 // Enviar el mensaje al servidor
                 $.ajax({
                     url: '/api/chatbot',
@@ -57,10 +105,13 @@
                     contentType: 'application/json',
                     data: JSON.stringify({ message: message }),
                     success: function (response) {
+                        // Remover el spinner de carga
+                        $('#loading-spinner').remove();
+
                         // Agregar la respuesta del asistente a la vista con la imagen
                         $('#chatBox').append(
                             '<div class="chat-message assistant">' +
-                            '<img src="/css/chatbot.png" alt="Assistant Image">' + // Reemplaza con tu ruta de imagen
+                            '<img src="/css/catbot.jpg" alt="Assistant Image">' + // Reemplaza con tu ruta de imagen
                             '<div>' + response + '</div>' +
                             '</div>'
                         );
@@ -68,11 +119,20 @@
                         $('#chatBox').scrollTop($('#chatBox')[0].scrollHeight);
                     },
                     error: function () {
+                        $('#loading-spinner').remove();
                         $('#chatBox').append('<div class="chat-message assistant">Error al enviar el mensaje.</div>');
                     }
                 });
             });
+
+            // Funcionalidad para el botón de borrar chat
+            $('#clearChat').on('click', function () {
+                $('#chatBox').empty(); // Limpia todo el contenido del chat
+            });
         });
+
+
     </script>
+    
 </body>
 </html>
